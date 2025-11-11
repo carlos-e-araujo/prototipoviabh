@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Via BH - A Sua Concessionária de Elétricos</title>
+
+    <!-- Importação da Fonte (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos CSS Puros -->
+    <style>
+        /* =============================================
+           1. Variáveis de Estilo (Root)
+           ============================================= */
+        :root {
+            /* Cores */
+            --color-primary: #c52522;
+            /* Vermelho principal (substituindo o azul) */
+            --color-primary-dark: #a01f1c;
+            /* Tom mais escuro do vermelho */
+            --color-primary-light: #db4f4c;
+            /* Tom mais claro (para texto no CTA) */
+            --color-primary-shadow: rgba(197, 37, 34, 0.3);
+            /* Sombra vermelha */
+
+            --color-bg-950: #0f0101;
+            --color-bg-900: #111827;
+            --color-bg-800: #1f2937;
+            --color-bg-700: #374151;
+            --color-bg-600: #4b5563;
+
+            --color-text-white: #ffffff;
+            --color-text-light: #e5e7eb;
+            --color-text-medium: #9ca3af;
+            --color-text-dark: #374151;
+
+            /* Fontes */
+            --font-family-sans: 'Inter', sans-serif;
+
+            /* Outros */
+            --border-radius: 0.75rem;
+            /* 12px */
+            --transition-all: all 0.3s ease-in-out;
+            --container-max-width: 1280px;
+            /* max-w-7xl */
+        }
+
+        /* =============================================
+           2. Reset Global e Estilos do Body
+           ============================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Ativando o "dark mode" por padrão */
+            background-color: var(--color-bg-900);
+            color: var(--color-text-light);
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =============================================
+           3. Classes Utilitárias (Container, Botões)
+           ============================================= */
+        .container {
+            width: 100%;
+            max-width: var(--container-max-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Ajustes de padding para responsividade */
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition-all);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-text-white);
+            box-shadow: 0 10px 15px -3px var(--color-primary-shadow), 0 4px 6px -2px var(--color-primary-shadow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-bg-700);
+            color: var(--color-text-white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-bg-600);
+            transform: scale(1.05);
+        }
+
+        .section-padding {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        /* =============================================
+           4. Header (Navegação)
+           ============================================= */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(17, 24, 39, 0.8);
+            /* bg-gray-900/80 */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+            /* border-gray-700/50 */
+        }
+
+        .main-header .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+            /* 80px */
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            /* 30px */
+            font-weight: 900;
+            color: var(--color-text-white);
+        }
+
+        .logo span {
+            color: var(--color-primary);
+        }
+
+        .logo .nav-logo {
+            width: 40%;
+        }
+
+        .nav-menu {
+            display: none;
+            /* Oculto por padrão */
+            align-items: center;
+        }
+
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+            color: var(--color-text-white);
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-menu .btn {
+            margin-left: 2rem;
+            padding: 0.5rem 1.25rem;
+        }
+
+        .mobile-menu-button {
+            display: block;
+            /* Mostra no mobile */
+            color: var(--color-text-light);
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* Menu mobile (dropdown) */
+        .mobile-nav {
+            display: none;
+            /* Começa oculto */
+            position: absolute;
+            top: 5rem;
+            /* Abaixo do header */
+            left: 0;
+            right: 0;
+            background-color: var(--color-bg-800);
+            border-bottom: 1px solid var(--color-bg-700);
+            padding: 1rem;
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--color-text-light);
+            border-radius: 0.5rem;
+        }
+
+        .mobile-nav a:hover {
+            background-color: var(--color-bg-700);
+        }
+
+        .mobile-nav .btn {
+            width: 100%;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Responsividade do Menu */
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .mobile-menu-button {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: none !important;
+                /* Garante que o menu dropdown não apareça em desktop */
+            }
+        }
+
+        /* =============================================
+           5. Secção Hero
+           ============================================= */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 5rem;
+            /* Espaço para o header */
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .hero-background .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--color-bg-900) 0%, rgba(17, 24, 39, 0.8) 50%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            /* 40px */
+            font-weight: 900;
+            color: var(--color-text-white);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--color-primary);
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            /* 18px */
+            color: var(--color-text-medium);
+            max-width: 48rem;
+            /* max-w-3xl */
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-content h1 {
+                font-size: 3.75rem;
+                /* 60px */
+            }
+
+            .hero-content p {
+                font-size: 1.25rem;
+                /* 20px */
+            }
+
+            .hero-actions {
+                flex-direction: row;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-content h1 {
+                font-size: 4.5rem;
+                /* 72px */
+            }
+        }
+
+        /* =============================================
+           6. Secção Modelos ("#modelos")
+           ============================================= */
+        .models-section {
+            background-color: var(--color-bg-900);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            /* 36px */
+            font-weight: 800;
+            color: var(--color-text-white);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            /* 18px */
+            color: var(--color-text-medium);
+            max-width: 42rem;
+            /* max-w-2xl */
+            margin: 0 auto;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .model-card .price {
+            color: var(--color-primary);
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .model-card {
+            background-color: var(--color-bg-800);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-all);
+            margin-top: 45px;
+        }
+
+        .model-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px var(--color-primary-shadow), 0 10px 10px -5px var(--color-primary-shadow);
+        }
+
+        .model-card img {
+            width: 100%;
+            height: 14rem;
+            /* 224px */
+            object-fit: cover;
+        }
+
+        .model-card-content {
+            padding: 1.5rem;
+        }
+
+        .model-card-content h3 {
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card-content p {
+            color: var(--color-text-medium);
+            margin-bottom: 1rem;
+        }
+
+        .model-card-specs {
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            /* 14px */
+            color: var(--color-text-light);
+        }
+
+        .model-card-specs li {
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card-specs span {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .model-card .btn {
+            width: 100%;
+            background-color: var(--color-bg-700);
+        }
+
+        .model-card .btn:hover {
+            background-color: var(--color-primary);
+        }
+
+        .models-btn {
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .models-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .models-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* =============================================
+           7. Secção Vantagens ("#vantagens")
+           ============================================= */
+        .features-section {
+            background-color: var(--color-bg-800);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-icon {
+            width: 5rem;
+            /* 80px */
+            height: 5rem;
+            /* 80px */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(197, 37, 34, 0.1);
+            /* bg-primary/20 */
+            border: 2px solid var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 2.5rem;
+            /* 40px */
+            height: 2.5rem;
+            /* 40px */
+            color: var(--color-primary);
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-item p {
+            color: var(--color-text-medium);
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* =============================================
+           8. Secção CTA Test Drive ("#test-drive")
+           ============================================= */
+        .cta-section {
+            background-color: var(--color-primary);
+        }
+
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .cta-text {
+            text-align: center;
+            color: var(--color-text-white);
+        }
+
+        .cta-text h2 {
+            font-size: 2.25rem;
+            /* 36px */
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text p {
+            font-size: 1.25rem;
+            /* 20px */
+            opacity: 0.9;
+            /* text-primary-100 */
+        }
+
+        .cta-text p:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+
+        .cta-form-wrapper {
+            width: 100%;
+            max-width: 32rem;
+            /* max-w-lg */
+        }
+
+        .cta-form {
+            background-color: var(--color-bg-800);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .cta-form h3 {
+            font-size: 1.875rem;
+            /* 30px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            /* 14px */
+            font-weight: 500;
+            color: var(--color-text-medium);
+            margin-bottom: 0.25rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            background-color: var(--color-bg-700);
+            color: var(--color-text-white);
+            border: 1px solid var(--color-bg-600);
+            border-radius: 0.5rem;
+            /* 8px */
+            padding: 0.75rem 1rem;
+            transition: var(--transition-all);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px var(--color-primary-shadow);
+        }
+
+        /* Ajuste para <select> */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+
+        .cta-form .btn-primary {
+            width: 100%;
+            font-size: 1.125rem;
+            /* 18px */
+        }
+
+        @media (min-width: 1024px) {
+            .cta-container {
+                flex-direction: row;
+                gap: 6rem;
+            }
+
+            .cta-text {
+                text-align: left;
+                flex: 1;
+            }
+
+            .cta-form-wrapper {
+                flex: 1;
+            }
+        }
+
+        /* =============================================
+           9. Footer
+           ============================================= */
+        .main-footer {
+            background-color: var(--color-bg-950);
+            color: var(--color-text-medium);
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.125rem;
+            /* 18px */
+            font-weight: 600;
+            color: var(--color-text-white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            font-size: 0.875rem;
+            /* 14px */
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--color-primary);
+            transition: var(--transition-all);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-socials a {
+            color: var(--color-text-medium);
+        }
+
+        .footer-socials a:hover {
+            color: var(--color-primary);
+            transition: var(--transition-all);
+        }
+
+        .footer-socials svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--color-bg-800);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            /* 14px */
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- ===== Header / Navegação ===== -->
+    <header class="main-header">
+        <nav class="container">
+            <div class="nav-container">
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <span><img class="nav-logo" src="assests/logo.png" alt=""></span>
+                </a>
+
+                <!-- Menu Desktop -->
+                <div class="nav-menu">
+                    <a href="/index.html#modelos">Modelos</a>
+                    <a href="/index.html#vantagens">Vantagens</a>
+                    <a href="/catalogo.html">Catálogo</a>
+                    <a href="#test-drive" class="btn btn-primary">
+                        Agendar Test Drive
+                    </a>
+                </div>
+
+                <!-- Botão Menu Mobile -->
+                <button class="mobile-menu-button" id="mobile-menu-toggle" aria-label="Abrir menu">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menu Mobile (Dropdown) -->
+        <div class="mobile-nav" id="mobile-nav-menu">
+            <div class="container">
+                <a href="/index.html#modelos">Modelos</a>
+                <a href="/index.html#vantagens">Vantagens</a>
+                <a href="/catalogo.html">Catálogo</a>
+                <a href="#test-drive" class="btn btn-primary">
+                    Agendar Test Drive
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== Secção Hero ===== -->
+        <section id="hero" class="hero">
+            <!-- Imagem de Fundo e Overlay -->
+            <div class="hero-background">
+                <img src="/assests/moto_hero.png" alt="Carro elétrico moderno numa paisagem futurista"
+                    onerror="this.src='https://placehold.co/1920x1080/0a0a2a/e0e0e0?text=O+Futuro+da+Condução'; this.onerror=null;">
+                <div class="overlay"></div>
+            </div>
+
+            <!-- Conteúdo do Hero -->
+            <div class="hero-content container">
+                <h1>
+                    O Futuro da Condução é <span>Elétrico</span>.
+                </h1>
+                <p>
+                    Descubra a nossa seleção premium de veículos 100% elétricos. Inovação, performance e
+                    sustentabilidade num só lugar.
+                </p>
+                <div class="hero-actions">
+                    <a href="#modelos" class="btn btn-primary btn-lg">
+                        Explorar Modelos
+                    </a>
+                    <a href="#test-drive" class="btn btn-secondary btn-lg">
+                        Agendar Test Drive
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Secção Modelos em Destaque ===== -->
+        <section id="modelos" class="models-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nossos Veículos em Destaque</h2>
+                    <p>
+                        Do sedan executivo ao SUV familiar, encontre o elétrico perfeito para o seu estilo de vida.
+                    </p>
+                </div>
+
+                <div class="models-grid">
+                    <div class="model-card">
+                        <img src="/assests/home_2.jpeg">
+                        <div class="model-card-content">
+                            <h3>FUN MOTORS LAMINHA</h3>
+                            <p><span class="price">R$ 6.800</span></p>
+                            <ul class="model-card-specs">
+                                <li><span>Velocidade Máxima:</span> 40km/h</li>
+                                <li><span>Cilindrada:</span> 49cc</li>
+                            </ul>
+                            <a href="/produto.html" class="btn">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <img src="/assests/home_2.jpeg">
+                        <div class="model-card-content">
+                            <h3>FUN MOTORS LAMINHA</h3>
+                            <p><span class="price">R$ 6.800</span></p>
+                            <ul class="model-card-specs">
+                                <li><span>Velocidade Máxima:</span> 40km/h</li>
+                                <li><span>Cilindrada:</span> 49cc</li>
+                            </ul>
+                            <a href="/produto.html" class="btn">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <img src="/assests/home_2.jpeg">
+                        <div class="model-card-content">
+                            <h3>FUN MOTORS LAMINHA</h3>
+                            <p><span class="price">R$ 6.800</span></p>
+                            <ul class="model-card-specs">
+                                <li><span>Velocidade Máxima:</span> 40km/h</li>
+                                <li><span>Cilindrada:</span> 49cc</li>
+                            </ul>
+                            <a href="/produto.html" class="btn">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <img src="/assests/home_2.jpeg">
+                        <div class="model-card-content">
+                            <h3>FUN MOTORS LAMINHA</h3>
+                            <p><span class="price">R$ 6.800</span></p>
+                            <ul class="model-card-specs">
+                                <li><span>Velocidade Máxima:</span> 40km/h</li>
+                                <li><span>Cilindrada:</span> 49cc</li>
+                            </ul>
+                            <a href="/produto.html" class="btn">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <img src="/assests/home_2.jpeg">
+                        <div class="model-card-content">
+                            <h3>FUN MOTORS LAMINHA</h3>
+                            <p><span class="price">R$ 6.800</span></p>
+                            <ul class="model-card-specs">
+                                <li><span>Velocidade Máxima:</span> 40km/h</li>
+                                <li><span>Cilindrada:</span> 49cc</li>
+                            </ul>
+                            <a href="/produto.html" class="btn">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <img src="/assests/home_2.jpeg">
+                        <div class="model-card-content">
+                            <h3>FUN MOTORS LAMINHA</h3>
+                            <p><span class="price">R$ 6.800</span></p>
+                            <ul class="model-card-specs">
+                                <li><span>Velocidade Máxima:</span> 40km/h</li>
+                                <li><span>Cilindrada:</span> 49cc</li>
+                            </ul>
+                            <a href="/produto.html" class="btn">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="models-btn section-padding">
+                    <a href="/catalogo.html" class="btn btn-primary">Veja o estoque completo</a>
+                </div>
+        </section>
+
+        <!-- ===== Secção Vantagens (Ícones) ===== -->
+        <section id="vantagens" class="features-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Porquê Mudar para Elétrico?</h2>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Vantagem 1: Economia -->
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#c52522"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,88a40,40,0,1,0,40,40A40,40,0,0,0,128,88Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,152ZM240,56H16a8,8,0,0,0-8,8V192a8,8,0,0,0,8,8H240a8,8,0,0,0,8-8V64A8,8,0,0,0,240,56ZM193.65,184H62.35A56.78,56.78,0,0,0,24,145.65v-35.3A56.78,56.78,0,0,0,62.35,72h131.3A56.78,56.78,0,0,0,232,110.35v35.3A56.78,56.78,0,0,0,193.65,184ZM232,93.37A40.81,40.81,0,0,1,210.63,72H232ZM45.37,72A40.81,40.81,0,0,1,24,93.37V72ZM24,162.63A40.81,40.81,0,0,1,45.37,184H24ZM210.63,184A40.81,40.81,0,0,1,232,162.63V184Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3>Economia Real</h3>
+                        <p>Reduza drasticamente os seus custos com combustível e manutenção. Carregue em casa por uma
+                            fração do preço.</p>
+                    </div>
+
+                    <!-- Vantagem 2: Ambiente -->
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.25 9.75 16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0 0 20.25 18V5.75A2.25 2.25 0 0 0 18 3.5H6A2.25 2.25 0 0 0 3.75 5.75v12.5A2.25 2.25 0 0 0 6 20.25Z" />
+                            </svg>
+                        </div>
+                        <h3>Emissão Zero</h3>
+                        <p>Conduza com a consciência tranquila. Veículos elétricos não produzem emissões de escape,
+                            melhorando a qualidade do ar.</p>
+                    </div>
+
+                    <!-- Vantagem 3: Performance -->
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                            </svg>
+                        </div>
+                        <h3>Performance Instantânea</h3>
+                        <p>Sinta o torque instantâneo e uma aceleração impressionante. A condução elétrica é silenciosa,
+                            suave e incrivelmente responsiva.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Secção CTA Test Drive (Formulário) ===== -->
+        <section id="test-drive" class="cta-section section-padding">
+            <div class="container cta-container">
+                <!-- Lado Esquerdo: Texto -->
+                <div class="cta-text">
+                    <h2>Não fique só olhando. Sinta a potência!</h2>
+                    <p>
+                        A melhor forma de entender a revolução elétrica é sentando-se ao volante. Agende o seu test
+                        drive gratuito hoje mesmo.
+                    </p>
+                    <p>
+                        A nossa equipa de especialistas está pronta para lhe mostrar tudo o que precisa de saber.
+                    </p>
+                </div>
+
+                <!-- Lado Direito: Formulário -->
+                <div class="cta-form-wrapper">
+                    <form class="cta-form" onsubmit="return false;">
+                        <h3>Agende o Seu Test Drive</h3>
+
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" required class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modelo">Modelo de Interesse</label>
+                            <select id="modelo" name="modelo" class="form-select">
+                                <option>Volt Sedan S-1</option>
+                                <option>Volt SUV X-Plorer</option>
+                                <option>Volt City C-2</option>
+                                <option>Não tenho a certeza</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Enviar Pedido
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo e Descrição -->
+                <div class="footer-col">
+                    <a href="#" class="logo">
+                        Via <span>BH</span>
+                    </a>
+                    <p style="margin-top: 1rem; max-width: 250px;">
+                        A sua concessionária de confiança para um futuro mais limpo e eletrificado.
+                    </p>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li> <a href="/index.html#modelos">Modelos</a> </li>
+                        <li><a href="/index.html#vantagens">Vantagens</a></li>
+                        <li><a href="#test-drive">Test Drive</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>Morada: Av. da Inovação, 123, Lisboa</li>
+                        <li>Telefone: +351 210 000 000</li>
+                        <li>Email: contato@viabh.com.br</li>
+                    </ul>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="footer-col">
+                    <h4>Siga-nos</h4>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Via BH. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para o ano atual
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Script para o menu mobile
+        const menuButton = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            // Mudar o aria-label para acessibilidade
+            const isOpen = mobileNav.classList.contains('open');
+            menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+        });
+
+        // Opcional: Fechar o menu ao clicar num link (bom para SPAs, mas útil aqui também)
+        document.querySelectorAll('#mobile-nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                menuButton.setAttribute('aria-label', 'Abrir menu');
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

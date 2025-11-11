@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Via BH - A Sua Concessionária de Elétricos</title>
+
+    <!-- Importação da Fonte (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos CSS Puros -->
+    <style>
+        /* =============================================
+           1. Variáveis de Estilo (Root)
+           ============================================= */
+        :root {
+            /* Cores */
+            --color-primary: #c52522;
+            /* Vermelho principal (substituindo o azul) */
+            --color-primary-dark: #a01f1c;
+            /* Tom mais escuro do vermelho */
+            --color-primary-light: #db4f4c;
+            /* Tom mais claro (para texto no CTA) */
+            --color-primary-shadow: rgba(197, 37, 34, 0.3);
+            /* Sombra vermelha */
+
+            --color-bg-950: #0f0101;
+            --color-bg-900: #111827;
+            --color-bg-800: #1f2937;
+            --color-bg-700: #374151;
+            --color-bg-600: #4b5563;
+
+            --color-text-white: #ffffff;
+            --color-text-light: #e5e7eb;
+            --color-text-medium: #9ca3af;
+            --color-text-dark: #374151;
+
+            /* Fontes */
+            --font-family-sans: 'Inter', sans-serif;
+
+            /* Outros */
+            --border-radius: 0.75rem;
+            /* 12px */
+            --transition-all: all 0.3s ease-in-out;
+            --container-max-width: 1280px;
+            /* max-w-7xl */
+        }
+
+        /* =============================================
+           2. Reset Global e Estilos do Body
+           ============================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Ativando o "dark mode" por padrão */
+            background-color: var(--color-bg-900);
+            color: var(--color-text-light);
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =============================================
+           3. Classes Utilitárias (Container, Botões)
+           ============================================= */
+        .container {
+            width: 100%;
+            max-width: var(--container-max-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Ajustes de padding para responsividade */
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition-all);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-text-white);
+            box-shadow: 0 10px 15px -3px var(--color-primary-shadow), 0 4px 6px -2px var(--color-primary-shadow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-bg-700);
+            color: var(--color-text-white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-bg-600);
+            transform: scale(1.05);
+        }
+
+        .section-padding {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        /* =============================================
+           4. Header (Navegação)
+           ============================================= */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(17, 24, 39, 0.8);
+            /* bg-gray-900/80 */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+            /* border-gray-700/50 */
+        }
+
+        .main-header .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+            /* 80px */
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            /* 30px */
+            font-weight: 900;
+            color: var(--color-text-white);
+        }
+
+        .logo span {
+            color: var(--color-primary);
+        }
+
+        .logo .nav-logo {
+            width: 40%;
+        }
+
+        .nav-menu {
+            display: none;
+            /* Oculto por padrão */
+            align-items: center;
+        }
+
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+            color: var(--color-text-white);
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-menu .btn {
+            margin-left: 2rem;
+            padding: 0.5rem 1.25rem;
+        }
+
+        .mobile-menu-button {
+            display: block;
+            /* Mostra no mobile */
+            color: var(--color-text-light);
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* Menu mobile (dropdown) */
+        .mobile-nav {
+            display: none;
+            /* Começa oculto */
+            position: absolute;
+            top: 5rem;
+            /* Abaixo do header */
+            left: 0;
+            right: 0;
+            background-color: var(--color-bg-800);
+            border-bottom: 1px solid var(--color-bg-700);
+            padding: 1rem;
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--color-text-light);
+            border-radius: 0.5rem;
+        }
+
+        .mobile-nav a:hover {
+            background-color: var(--color-bg-700);
+        }
+
+        .mobile-nav .btn {
+            width: 100%;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Responsividade do Menu */
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .mobile-menu-button {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: none !important;
+                /* Garante que o menu dropdown não apareça em desktop */
+            }
+        }
+
+        /* =============================================
+           5. Secção Hero
+           ============================================= */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 5rem;
+            /* Espaço para o header */
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .hero-background .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--color-bg-900) 0%, rgba(17, 24, 39, 0.8) 50%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            /* 40px */
+            font-weight: 900;
+            color: var(--color-text-white);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--color-primary);
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            /* 18px */
+            color: var(--color-text-medium);
+            max-width: 48rem;
+            /* max-w-3xl */
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-content h1 {
+                font-size: 3.75rem;
+                /* 60px */
+            }
+
+            .hero-content p {
+                font-size: 1.25rem;
+                /* 20px */
+            }
+
+            .hero-actions {
+                flex-direction: row;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-content h1 {
+                font-size: 4.5rem;
+                /* 72px */
+            }
+        }
+
+        /* =============================================
+           6. Secção Modelos ("#modelos")
+           ============================================= */
+        .models-section {
+            background-color: var(--color-bg-900);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            /* 36px */
+            font-weight: 800;
+            color: var(--color-text-white);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            /* 18px */
+            color: var(--color-text-medium);
+            max-width: 42rem;
+            /* max-w-2xl */
+            margin: 0 auto;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .model-card .price {
+            color: var(--color-primary);
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .model-card {
+            background-color: var(--color-bg-800);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-all);
+            margin-top: 45px;
+        }
+
+        .model-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px var(--color-primary-shadow), 0 10px 10px -5px var(--color-primary-shadow);
+        }
+
+        .model-card img {
+            width: 100%;
+            height: 14rem;
+            /* 224px */
+            object-fit: cover;
+        }
+
+        .model-card-content {
+            padding: 1.5rem;
+        }
+
+        .model-card-content h3 {
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card-content p {
+            color: var(--color-text-medium);
+            margin-bottom: 1rem;
+        }
+
+        .model-card-specs {
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            /* 14px */
+            color: var(--color-text-light);
+        }
+
+        .model-card-specs li {
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card-specs span {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .model-card .btn {
+            width: 100%;
+            background-color: var(--color-bg-700);
+        }
+
+        .model-card .btn:hover {
+            background-color: var(--color-primary);
+        }
+
+        .models-btn {
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .models-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .models-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* =============================================
+           7. Secção Vantagens ("#vantagens")
+           ============================================= */
+        .features-section {
+            background-color: var(--color-bg-800);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-icon {
+            width: 5rem;
+            /* 80px */
+            height: 5rem;
+            /* 80px */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(197, 37, 34, 0.1);
+            /* bg-primary/20 */
+            border: 2px solid var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 2.5rem;
+            /* 40px */
+            height: 2.5rem;
+            /* 40px */
+            color: var(--color-primary);
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-item p {
+            color: var(--color-text-medium);
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* =============================================
+           8. Secção CTA (Formulário) - REUTILIZADA
+           ============================================= */
+        .cta-section {
+            background-color: var(--color-primary);
+        }
+
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .cta-text {
+            text-align: center;
+            color: var(--color-text-white);
+        }
+
+        .cta-text h2 {
+            font-size: 2.25rem;
+            /* 36px */
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text p {
+            font-size: 1.25rem;
+            /* 20px */
+            opacity: 0.9;
+        }
+
+        .cta-text p:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+
+        .cta-form-wrapper {
+            width: 100%;
+            max-width: 32rem;
+            /* max-w-lg */
+        }
+
+        .cta-form {
+            background-color: var(--color-bg-800);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .cta-form h3 {
+            font-size: 1.875rem;
+            /* 30px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            /* 14px */
+            font-weight: 500;
+            color: var(--color-text-medium);
+            margin-bottom: 0.25rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            background-color: var(--color-bg-700);
+            color: var(--color-text-white);
+            border: 1px solid var(--color-bg-600);
+            border-radius: 0.5rem;
+            /* 8px */
+            padding: 0.75rem 1rem;
+            transition: var(--transition-all);
+            font-family: inherit;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px var(--color-primary-shadow);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .cta-form .btn-primary {
+            width: 100%;
+            font-size: 1.125rem;
+            /* 18px */
+        }
+
+        @media (min-width: 1024px) {
+            .cta-container {
+                flex-direction: row;
+                gap: 6rem;
+            }
+
+            .cta-text {
+                text-align: left;
+                flex: 1;
+            }
+
+            .cta-form-wrapper {
+                flex: 1;
+            }
+        }
+
+        /* =============================================
+           9. Footer
+           ============================================= */
+        .main-footer {
+            background-color: var(--color-bg-950);
+            color: var(--color-text-medium);
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.125rem;
+            /* 18px */
+            font-weight: 600;
+            color: var(--color-text-white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            font-size: 0.875rem;
+            /* 14px */
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--color-primary);
+            transition: var(--transition-all);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-socials a {
+            color: var(--color-text-medium);
+        }
+
+        .footer-socials a:hover {
+            color: var(--color-primary);
+            transition: var(--transition-all);
+        }
+
+        .footer-socials svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--color-bg-800);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            /* 14px */
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* =============================================
+           10. Secção Página de Produto (NOVO)
+           ============================================= */
+        .product-demo-section {
+            padding-top: 8rem;
+            /* 5rem header + 3rem padding */
+            padding-bottom: 6rem;
+            background-color: var(--color-bg-900);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        /* Coluna da Galeria */
+        .product-gallery img {
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        #main-product-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border: 1px solid var(--color-bg-700);
+        }
+
+        .thumbnail-gallery {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .thumbnail-gallery img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: var(--transition-all);
+            border: 2px solid transparent;
+        }
+
+        .thumbnail-gallery img:hover,
+        .thumbnail-gallery img.active {
+            opacity: 1;
+            border-color: var(--color-primary);
+        }
+
+        /* Coluna de Informação */
+        .product-info h1 {
+            font-size: 2.25rem;
+            /* 36px */
+            font-weight: 800;
+            color: var(--color-text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-tagline {
+            font-size: 1.25rem;
+            /* 20px */
+            font-weight: 500;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-description {
+            color: var(--color-text-medium);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .product-info h3 {
+            font-size: 1.25rem;
+            /* 20px */
+            font-weight: 700;
+            color: var(--color-text-light);
+            border-bottom: 1px solid var(--color-bg-700);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-specs {
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            /* 14px */
+            color: var(--color-text-light);
+        }
+
+        .product-specs li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--color-bg-700);
+        }
+
+        .product-specs span {
+            font-weight: 600;
+            color: var(--color-text-medium);
+            margin-right: 1rem;
+        }
+
+        .product-info .btn-primary {
+            width: 100%;
+        }
+
+        /* Layout responsivo para a secção do produto */
+        @media (min-width: 1024px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- ===== Header / Navegação ===== -->
+    <header class="main-header">
+        <nav class="container">
+            <div class="nav-container">
+                <!-- Logo -->
+                <a href="/index.html" class="logo">
+                    <span><img class="nav-logo" src="assests/logo.png" alt=""></span>
+                </a>
+
+                <!-- Menu Desktop -->
+                <div class="nav-menu">
+                    <a href="/index.html#modelos">Modelos</a>
+                    <a href="/index.html#vantagens">Vantagens</a>
+                    <a href="/catalogo.html">Catálogo</a>
+                    <a href="#test-drive" class="btn btn-primary">
+                        Agendar Test Drive
+                    </a>
+                </div>
+
+                <!-- Botão Menu Mobile -->
+                <button class="mobile-menu-button" id="mobile-menu-toggle" aria-label="Abrir menu">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menu Mobile (Dropdown) -->
+        <div class="mobile-nav" id="mobile-nav-menu">
+            <div class="container">
+                <a href="/index.html#modelos">Modelos</a>
+                <a href="/index.html#vantagens">Vantagens</a>
+                <a href="/catalogo.html">Catálogo</a>
+                <a href="#test-drive" class="btn btn-primary">
+                    Agendar Test Drive
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== Secção de Demonstração do Produto ===== -->
+        <section class="product-demo-section">
+            <div class="container">
+                <div class="product-grid">
+
+                    <!-- Coluna da Esquerda: Galeria de Imagens -->
+                    <div class="product-gallery">
+                        <img src="/assests/produto_4.jpeg" alt="Vista frontal do Volt Sedan S-1" id="main-product-image"
+                            onerror="this.src='https://placehold.co/800x600/1f2937/ffffff?text=Volt+Sedan+S-1+Frente'; this.onerror=null;">
+
+                        <div class="thumbnail-gallery" id="thumbnail-container">
+                            <img src="/assests/produto_4.jpeg" alt="Thumbnail - Vista frontal" class="active"
+                                data-src="/assests/produto_4.jpeg">
+                            <img src="/assests/produto_3.jpeg" alt="Thumbnail - Vista lateral"
+                                data-src="/assests/produto_3.jpeg">
+                            <img src="/assests/produto_2.jpeg" alt="Thumbnail - Vista interior"
+                                data-src="/assests/produto_2.jpeg">
+                            <img src="/assests/produto_1.jpeg" alt="Thumbnail - Vista traseira"
+                                data-src="/assests/produto_1.jpeg">
+                        </div>
+                    </div>
+
+                    <!-- Coluna da Direita: Informações do Produto -->
+                    <div class="product-info">
+                        <h1>FUN MOTORS LAMINHA</h1>
+                        <p class="product-tagline">A Primeira Aventura Começa Aqui!</p>
+                        <p class="product-description">
+                            Transforme o fim de semana da criançada com a Fun Motors Laminha! Projetada para os pequenos
+                            pilotos que não têm medo de se sujar, essa mini moto é a porta de entrada perfeita para o
+                            mundo off-road. Com um visual agressivo e motor valente, ela entrega a dose certa de
+                            adrenalina, sem abrir mão da segurança que os pais exigem. É hora de sair do sofá e acelerar
+                            na terra!
+                        </p>
+
+                        <h3>Especificações Principais</h3>
+                        <ul class="product-specs">
+                            <li><span>Motor:<span> <strong>Monocilíndrico, 2 tempos e Refrigerado a Ar</strong></li>
+                            <li><span>Cilindrada:</span> <strong>49cc</strong></li>
+                            <li><span>Potência:</span> <strong>3.5 cv</strong></li>
+                            <li><span>Sistema de combustível:</span> <strong>Carburador</strong></li>
+                            <li><span>Tipo de combustível:</span> <strong>Gasolina + Óleo 2 tempos (25:1)</strong></li>
+                        </ul>
+
+                        <a href="#contato" class="btn btn-primary btn-lg">
+                            Solicitar Orçamento
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Secção Formulário de Orçamento (Reutilizada) ===== -->
+        <section id="contato" class="cta-section section-padding">
+            <div class="container cta-container">
+                <!-- Lado Esquerdo: Texto -->
+                <div class="cta-text">
+                    <h2>Entre em Contato</h2>
+                    <p>
+                        Interessado na FUN MOTORS LAMINHA? Preencha o formulário e nossa equipa de especialistas entrará
+                        em contato com um orçamento detalhado e as próximas etapas.
+                    </p>
+                </div>
+
+                <!-- Lado Direito: Formulário -->
+                <div class="cta-form-wrapper">
+                    <form class="cta-form" onsubmit="return false;">
+                        <h3>Solicitar Orçamento</h3>
+
+                        <div class="form-group">
+                            <label for="nome-contato">Nome Completo</label>
+                            <input type="text" id="nome-contato" name="nome" required class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-contato">Email</label>
+                            <input type="email" id="email-contato" name="email" required class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone-contato">Telefone</label>
+                            <input type="tel" id="telefone-contato" name="telefone" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensagem-contato">Mensagem (Opcional)</label>
+                            <textarea id="mensagem-contato" name="mensagem" class="form-textarea"
+                                placeholder="Ex: Gostaria de saber sobre opções de financiamento..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Enviar Pedido
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo e Descrição -->
+                <div class="footer-col">
+                    <a href="#" class="logo">
+                        Via <span>BH</span>
+                    </a>
+                    <p style="margin-top: 1rem; max-width: 250px;">
+                        A sua concessionária de confiança para um futuro mais limpo e eletrificado.
+                    </p>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li> <a href="/index.html#modelos">Modelos</a> </li>
+                        <li><a href="/index.html#vantagens">Vantagens</a></li>
+                        <li><a href="#test-drive">Test Drive</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>Morada: Av. da Inovação, 123, Lisboa</li>
+                        <li>Telefone: +351 210 000 000</li>
+                        <li>Email: contato@viabh.com.br</li>
+                    </ul>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="footer-col">
+                    <h4>Siga-nos</h4>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Via BH. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para o ano atual
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Script para o menu mobile
+        const menuButton = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            const isOpen = mobileNav.classList.contains('open');
+            menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+        });
+
+        document.querySelectorAll('#mobile-nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                menuButton.setAttribute('aria-label', 'Abrir menu');
+            });
+        });
+
+        // NOVO: Script para a galeria de thumbnails
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnailsContainer = document.getElementById('thumbnail-container');
+
+        if (thumbnailsContainer && mainImage) {
+            const thumbnails = thumbnailsContainer.getElementsByTagName('img');
+
+            thumbnailsContainer.addEventListener('click', (event) => {
+                if (event.target.tagName === 'IMG') {
+                    // Remove a classe 'active' de todas
+                    for (let thumb of thumbnails) {
+                        thumb.classList.remove('active');
+                    }
+
+                    // Adiciona 'active' à clicada
+                    event.target.classList.add('active');
+
+                    // Muda a imagem principal
+                    mainImage.src = event.target.dataset.src;
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

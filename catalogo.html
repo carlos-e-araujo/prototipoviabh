@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Via BH - A Sua Concessionária de Elétricos</title>
+
+    <!-- Importação da Fonte (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos CSS Puros -->
+    <style>
+        /* =============================================
+           1. Variáveis de Estilo (Root)
+           ============================================= */
+        :root {
+            /* Cores */
+            --color-primary: #c52522;
+            /* Vermelho principal */
+            --color-primary-dark: #a01f1c;
+            --color-primary-light: #db4f4c;
+            --color-primary-shadow: rgba(197, 37, 34, 0.3);
+
+            --color-bg-950: #030712;
+            --color-bg-900: #111827;
+            --color-bg-800: #1f2937;
+            --color-bg-700: #374151;
+            --color-bg-600: #4b5563;
+
+            --color-text-white: #ffffff;
+            --color-text-light: #e5e7eb;
+            --color-text-medium: #9ca3af;
+            --color-text-dark: #374151;
+
+            /* Fontes */
+            --font-family-sans: 'Inter', sans-serif;
+
+            /* Outros */
+            --border-radius: 0.75rem;
+            /* 12px */
+            --transition-all: all 0.3s ease-in-out;
+            --container-max-width: 1280px;
+            /* max-w-7xl */
+        }
+
+        /* =============================================
+           2. Reset Global e Estilos do Body
+           ============================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--color-bg-900);
+            color: var(--color-text-light);
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =============================================
+           3. Classes Utilitárias (Container, Botões)
+           ============================================= */
+        .container {
+            width: 100%;
+            max-width: var(--container-max-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition-all);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-text-white);
+            box-shadow: 0 10px 15px -3px var(--color-primary-shadow), 0 4px 6px -2px var(--color-primary-shadow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-bg-700);
+            color: var(--color-text-white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-bg-600);
+            transform: scale(1.05);
+        }
+
+        .section-padding {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        /* =============================================
+           4. Header (Navegação)
+           ============================================= */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(17, 24, 39, 0.8);
+            /* bg-gray-900/80 */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+            /* border-gray-700/50 */
+        }
+
+        .main-header .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+            /* 80px */
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            /* 30px */
+            font-weight: 900;
+            color: var(--color-text-white);
+        }
+
+        .logo span {
+            color: var(--color-primary);
+        }
+
+        .logo .nav-logo {
+            width: 40%;
+        }
+
+        .nav-menu {
+            display: none;
+            /* Oculto por padrão */
+            align-items: center;
+        }
+
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+            color: var(--color-text-white);
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-menu .btn {
+            margin-left: 2rem;
+            padding: 0.5rem 1.25rem;
+        }
+
+        .mobile-menu-button {
+            display: block;
+            /* Mostra no mobile */
+            color: var(--color-text-light);
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* Menu mobile (dropdown) */
+        .mobile-nav {
+            display: none;
+            /* Começa oculto */
+            position: absolute;
+            top: 5rem;
+            /* Abaixo do header */
+            left: 0;
+            right: 0;
+            background-color: var(--color-bg-800);
+            border-bottom: 1px solid var(--color-bg-700);
+            padding: 1rem;
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--color-text-light);
+            border-radius: 0.5rem;
+        }
+
+        .mobile-nav a:hover {
+            background-color: var(--color-bg-700);
+        }
+
+        .mobile-nav .btn {
+            width: 100%;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Responsividade do Menu */
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .mobile-menu-button {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: none !important;
+                /* Garante que o menu dropdown não apareça em desktop */
+            }
+        }
+
+        /* =============================================
+           (Secções 5, 6, 7, 8 - Omitidas desta página)
+           ============================================= */
+
+        /* =============================================
+           9. Footer
+           ============================================= */
+        .main-footer {
+            background-color: var(--color-bg-950);
+            color: var(--color-text-medium);
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.125rem;
+            /* 18px */
+            font-weight: 600;
+            color: var(--color-text-white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            font-size: 0.875rem;
+            /* 14px */
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--color-primary);
+            transition: var(--transition-all);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-socials a:hover {
+            color: var(--color-primary);
+            transition: var(--transition-all);
+        }
+
+        .footer-socials svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--color-bg-800);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            /* 14px */
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* =============================================
+           10. Secção Catálogo (NOVO)
+           ============================================= */
+        .catalog-section {
+            padding-top: 8rem;
+            /* 5rem header + 3rem padding */
+            background-color: var(--color-bg-900);
+        }
+
+        .catalog-title {
+            font-size: 2.25rem;
+            /* 36px */
+            font-weight: 800;
+            color: var(--color-text-white);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .catalog-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        /* --- Filtros (Sidebar) --- */
+        .catalog-filters {
+            background-color: var(--color-bg-800);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            height: fit-content;
+            /* Para não esticar */
+        }
+
+        .catalog-filters h3 {
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-bg-700);
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group h4 {
+            font-size: 1.125rem;
+            /* 18px */
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+        }
+
+        .filter-option {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: var(--color-text-medium);
+        }
+
+        .filter-option input {
+            margin-right: 0.5rem;
+            /* Estiliza o checkbox/radio com a cor primária */
+            accent-color: var(--color-primary);
+        }
+
+        .filter-option label {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .filter-option:hover label {
+            color: var(--color-text-light);
+        }
+
+        .catalog-filters .btn-secondary {
+            width: 100%;
+        }
+
+        /* --- Grelha de Produtos --- */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2.5rem;
+        }
+
+        /* Estilos dos Cards (copiados da landing page) */
+        .model-card {
+            background-color: var(--color-bg-800);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-all);
+        }
+
+        .model-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px var(--color-primary-shadow), 0 10px 10px -5px var(--color-primary-shadow);
+        }
+
+        .model-card img {
+            width: 100%;
+            height: 14rem;
+            /* 224px */
+            object-fit: cover;
+        }
+
+        .model-card-content {
+            padding: 1.5rem;
+        }
+
+        .model-card-content h3 {
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--color-text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card-content p {
+            color: var(--color-text-medium);
+            margin-bottom: 1rem;
+        }
+
+        .model-card-specs {
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            /* 14px */
+            color: var(--color-text-light);
+        }
+
+        .model-card-specs li {
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card-specs span {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .model-card .btn {
+            width: 100%;
+            background-color: var(--color-bg-700);
+        }
+
+        .model-card .btn:hover {
+            background-color: var(--color-primary);
+        }
+
+        /* --- Media Queries --- */
+        @media (min-width: 768px) {
+            .catalog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .catalog-layout {
+                grid-template-columns: 280px 1fr;
+                /* Sidebar + Conteúdo */
+            }
+
+            .catalog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .catalog-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- ===== Header / Navegação ===== -->
+    <header class="main-header">
+        <nav class="container">
+            <div class="nav-container">
+                <!-- Logo -->
+                <a href="/index.html" class="logo">
+                    <span><img class="nav-logo" src="assests/logo.png" alt=""></span>
+                </a>
+
+                <!-- Menu Desktop -->
+                <div class="nav-menu">
+                    <a href="/index.html#modelos">Modelos</a>
+                    <a href="/index.html#vantagens">Vantagens</a>
+                    <a href="/catalogo.html">Catálogo</a>
+                    <a href="/index.html#test-drive" class="btn btn-primary">
+                        Agendar Test Drive
+                    </a>
+                </div>
+
+                <!-- Botão Menu Mobile -->
+                <button class="mobile-menu-button" id="mobile-menu-toggle" aria-label="Abrir menu">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menu Mobile (Dropdown) -->
+        <div class="mobile-nav" id="mobile-nav-menu">
+            <div class="container">
+                <a href="/index.html#modelos">Modelos</a>
+                <a href="/index.html#vantagens">Vantagens</a>
+                <a href="/catalogo.html">Catálogo</a>
+                <a href="/index.html#test-drive" class="btn btn-primary">
+                    Agendar Test Drive
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== Secção de Catálogo ===== -->
+        <section class="catalog-section section-padding">
+            <div class="container">
+                <h2 class="catalog-title">Explore Nossos Modelos</h2>
+
+                <div class="catalog-layout">
+
+                    <!-- Coluna da Esquerda: Filtros -->
+                    <aside class="catalog-filters" id="filters-container">
+                        <h3>Filtros</h3>
+
+                        <div class="filter-group">
+                            <h4>Categoria</h4>
+                            <span class="filter-option">
+                                <input type="checkbox" id="cat-sedan" name="category" value="sedan">
+                                <label for="cat-sedan">Sedan</label>
+                            </span>
+                            <span class="filter-option">
+                                <input type="checkbox" id="cat-suv" name="category" value="suv">
+                                <label for="cat-suv">SUV</label>
+                            </span>
+                            <span class="filter-option">
+                                <input type="checkbox" id="cat-compacto" name="category" value="compacto">
+                                <label for="cat-compacto">Compacto</label>
+                            </span>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Autonomia (mínima)</h4>
+                            <span class="filter-option">
+                                <input type="checkbox" id="range-400" name="range" value="400">
+                                <label for="range-400">400 km+</label>
+                            </span>
+                            <span class="filter-option">
+                                <input type="checkbox" id="range-500" name="range" value="500">
+                                <label for="range-500">500 km+</label>
+                            </span>
+                            <span class="filter-option">
+                                <input type="checkbox" id="range-600" name="range" value="600">
+                                <label for="range-600">600 km+</label>
+                            </span>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Nível de Preço</h4>
+                            <span class="filter-option">
+                                <input type="checkbox" id="price-1" name="price" value="1">
+                                <label for="price-1">Até 50.000€</label>
+                            </span>
+                            <span class="filter-option">
+                                <input type="checkbox" id="price-2" name="price" value="2">
+                                <label for="price-2">50.000€ - 80.000€</label>
+                            </span>
+                            <span class="filter-option">
+                                <input type="checkbox" id="price-3" name="price" value="3">
+                                <label for="price-3">Acima de 80.000€</label>
+                            </span>
+                        </div>
+
+                        <button class="btn btn-secondary" id="clear-filters">
+                            Limpar Filtros
+                        </button>
+                    </aside>
+
+                    <!-- Coluna da Direita: Grelha de Produtos -->
+                    <div class="catalog-grid" id="catalog-grid">
+
+                        <!-- Card 1: Sedan S-1 (link para a página de produto) -->
+                        <div class="model-card" data-category="sedan" data-range="620" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Sedan+Elétrico+S-Volt"
+                                alt="Sedan Elétrico S-Volt" onerror="this.src='https...';">
+                            <div class="model-card-content">
+                                <h3>Volt Sedan S-1</h3>
+                                <p>Luxo e performance que redefinem a sua viagem.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 620 km (WLTP)</li>
+                                    <li><span>0-100km/h:</span> 3.1s</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: SUV X-Plorer -->
+                        <div class="model-card" data-category="suv" data-range="550" data-price="2">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=SUV+Elétrico+X-Volt"
+                                alt="SUV Elétrico X-Volt" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt SUV X-Plorer</h3>
+                                <p>Espaço e versatilidade para toda a família.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 550 km (WLTP)</li>
+                                    <li><span>Lugares:</span> 7 (opcional)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Compacto C-2 -->
+                        <div class="model-card" data-category="compacto" data-range="400" data-price="1">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Compacto+Elétrico+C-Volt"
+                                alt="Compacto Elétrico C-Volt" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt City C-2</h3>
+                                <p>A solução ágil e inteligente para a selva urbana.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 400 km (WLTP)</li>
+                                    <li><span>Carregamento:</span> 30 min (10-80%)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Sedan S-1 Performance -->
+                        <div class="model-card" data-category="sedan" data-range="590" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Sedan+S-1+Performance"
+                                alt="Sedan S-1 Performance" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt Sedan S-1 P</h3>
+                                <p>Performance de supercarro com zero emissões.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 590 km (WLTP)</li>
+                                    <li><span>0-100km/h:</span> 2.1s</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: SUV X-Plorer Long Range -->
+                        <div class="model-card" data-category="suv" data-range="610" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=SUV+X-Plorer+Long+Range"
+                                alt="SUV X-Plorer Long Range" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt SUV X-Plorer LR</h3>
+                                <p>Autonomia extendida para as maiores aventuras.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 610 km (WLTP)</li>
+                                    <li><span>Lugares:</span> 5</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Compacto C-2 Urban -->
+                        <div class="model-card" data-category="compacto" data-range="420" data-price="1">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Compacto+C-2+Urban"
+                                alt="Compacto C-2 Urban" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt City C-2 Urban</h3>
+                                <p>Equipamento extra para o conforto na cidade.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 420 km (WLTP)</li>
+                                    <li><span>Carregamento:</span> 30 min (10-80%)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 1: Sedan S-1 (link para a página de produto) -->
+                        <div class="model-card" data-category="sedan" data-range="620" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Sedan+Elétrico+S-Volt"
+                                alt="Sedan Elétrico S-Volt" onerror="this.src='https...';">
+                            <div class="model-card-content">
+                                <h3>Volt Sedan S-1</h3>
+                                <p>Luxo e performance que redefinem a sua viagem.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 620 km (WLTP)</li>
+                                    <li><span>0-100km/h:</span> 3.1s</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: SUV X-Plorer -->
+                        <div class="model-card" data-category="suv" data-range="550" data-price="2">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=SUV+Elétrico+X-Volt"
+                                alt="SUV Elétrico X-Volt" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt SUV X-Plorer</h3>
+                                <p>Espaço e versatilidade para toda a família.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 550 km (WLTP)</li>
+                                    <li><span>Lugares:</span> 7 (opcional)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Compacto C-2 -->
+                        <div class="model-card" data-category="compacto" data-range="400" data-price="1">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Compacto+Elétrico+C-Volt"
+                                alt="Compacto Elétrico C-Volt" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt City C-2</h3>
+                                <p>A solução ágil e inteligente para a selva urbana.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 400 km (WLTP)</li>
+                                    <li><span>Carregamento:</span> 30 min (10-80%)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Sedan S-1 Performance -->
+                        <div class="model-card" data-category="sedan" data-range="590" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Sedan+S-1+Performance"
+                                alt="Sedan S-1 Performance" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt Sedan S-1 P</h3>
+                                <p>Performance de supercarro com zero emissões.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 590 km (WLTP)</li>
+                                    <li><span>0-100km/h:</span> 2.1s</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: SUV X-Plorer Long Range -->
+                        <div class="model-card" data-category="suv" data-range="610" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=SUV+X-Plorer+Long+Range"
+                                alt="SUV X-Plorer Long Range" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt SUV X-Plorer LR</h3>
+                                <p>Autonomia extendida para as maiores aventuras.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 610 km (WLTP)</li>
+                                    <li><span>Lugares:</span> 5</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Compacto C-2 Urban -->
+                        <div class="model-card" data-category="compacto" data-range="420" data-price="1">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Compacto+C-2+Urban"
+                                alt="Compacto C-2 Urban" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt City C-2 Urban</h3>
+                                <p>Equipamento extra para o conforto na cidade.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 420 km (WLTP)</li>
+                                    <li><span>Carregamento:</span> 30 min (10-80%)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+
+                        <!-- Card 1: Sedan S-1 (link para a página de produto) -->
+                        <div class="model-card" data-category="sedan" data-range="620" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Sedan+Elétrico+S-Volt"
+                                alt="Sedan Elétrico S-Volt" onerror="this.src='https...';">
+                            <div class="model-card-content">
+                                <h3>Volt Sedan S-1</h3>
+                                <p>Luxo e performance que redefinem a sua viagem.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 620 km (WLTP)</li>
+                                    <li><span>0-100km/h:</span> 3.1s</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: SUV X-Plorer -->
+                        <div class="model-card" data-category="suv" data-range="550" data-price="2">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=SUV+Elétrico+X-Volt"
+                                alt="SUV Elétrico X-Volt" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt SUV X-Plorer</h3>
+                                <p>Espaço e versatilidade para toda a família.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 550 km (WLTP)</li>
+                                    <li><span>Lugares:</span> 7 (opcional)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Compacto C-2 -->
+                        <div class="model-card" data-category="compacto" data-range="400" data-price="1">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Compacto+Elétrico+C-Volt"
+                                alt="Compacto Elétrico C-Volt" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt City C-2</h3>
+                                <p>A solução ágil e inteligente para a selva urbana.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 400 km (WLTP)</li>
+                                    <li><span>Carregamento:</span> 30 min (10-80%)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Sedan S-1 Performance -->
+                        <div class="model-card" data-category="sedan" data-range="590" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Sedan+S-1+Performance"
+                                alt="Sedan S-1 Performance" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt Sedan S-1 P</h3>
+                                <p>Performance de supercarro com zero emissões.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 590 km (WLTP)</li>
+                                    <li><span>0-100km/h:</span> 2.1s</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: SUV X-Plorer Long Range -->
+                        <div class="model-card" data-category="suv" data-range="610" data-price="3">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=SUV+X-Plorer+Long+Range"
+                                alt="SUV X-Plorer Long Range" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt SUV X-Plorer LR</h3>
+                                <p>Autonomia extendida para as maiores aventuras.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 610 km (WLTP)</li>
+                                    <li><span>Lugares:</span> 5</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Compacto C-2 Urban -->
+                        <div class="model-card" data-category="compacto" data-range="420" data-price="1">
+                            <img src="https://placehold.co/600x400/1f2937/ffffff?text=Compacto+C-2+Urban"
+                                alt="Compacto C-2 Urban" onerror="this.src='...';">
+                            <div class="model-card-content">
+                                <h3>Volt City C-2 Urban</h3>
+                                <p>Equipamento extra para o conforto na cidade.</p>
+                                <ul class="model-card-specs">
+                                    <li><span>Autonomia:</span> 420 km (WLTP)</li>
+                                    <li><span>Carregamento:</span> 30 min (10-80%)</li>
+                                </ul>
+                                <a href="produto.html" class="btn">Saber Mais</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo e Descrição -->
+                <div class="footer-col">
+                    <a href="#" class="logo">
+                        Via <span>BH</span>
+                    </a>
+                    <p style="margin-top: 1rem; max-width: 250px;">
+                        A sua concessionária de confiança para um futuro mais limpo e eletrificado.
+                    </p>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li> <a href="/index.html#modelos">Modelos</a> </li>
+                        <li><a href="/index.html#vantagens">Vantagens</a></li>
+                        <li><a href="/index.html#test-drive">Test Drive</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>Morada: Av. da Inovação, 123, Lisboa</li>
+                        <li>Telefone: +351 210 000 000</li>
+                        <li>Email: contato@viabh.com.br</li>
+                    </ul>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="footer-col">
+                    <h4>Siga-nos</h4>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#9ca3af"
+                                viewBox="0 0 256 256" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);">
+                                <path
+                                    d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Via BH. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para o ano atual
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Script para o menu mobile
+        const menuButton = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            const isOpen = mobileNav.classList.contains('open');
+            menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+        });
+
+        document.querySelectorAll('#mobile-nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                menuButton.setAttribute('aria-label', 'Abrir menu');
+            });
+        });
+
+        // NOVO: Script para Filtros do Catálogo
+        const filterContainer = document.getElementById('filters-container');
+        const catalogGrid = document.getElementById('catalog-grid');
+        const clearFiltersButton = document.getElementById('clear-filters');
+
+        if (filterContainer && catalogGrid && clearFiltersButton) {
+            const filterInputs = filterContainer.querySelectorAll('input[type="checkbox"]');
+            const allCards = catalogGrid.querySelectorAll('.model-card');
+
+            function filterProducts() {
+                const filters = {
+                    category: [],
+                    range: [],
+                    price: []
+                };
+
+                // Coletar filtros ativos
+                filterInputs.forEach(input => {
+                    if (input.checked) {
+                        filters[input.name].push(input.value);
+                    }
+                });
+
+                // Iterar sobre os cartões e mostrar/ocultar
+                allCards.forEach(card => {
+                    const cardData = card.dataset;
+                    let showCard = true;
+
+                    // Verificar Categoria
+                    if (filters.category.length > 0 && !filters.category.includes(cardData.category)) {
+                        showCard = false;
+                    }
+
+                    // Verificar Autonomia (Range) - Pelo menos UM filtro de autonomia deve ser satisfeito
+                    if (filters.range.length > 0) {
+                        const cardRange = parseInt(cardData.range);
+                        // 'some' verifica se o cartão passa em pelo menos uma das opções de autonomia marcadas
+                        const rangeMatch = filters.range.some(minRange => cardRange >= parseInt(minRange));
+                        if (!rangeMatch) {
+                            showCard = false;
+                        }
+                    }
+
+                    // Verificar Preço
+                    if (filters.price.length > 0 && !filters.price.includes(cardData.price)) {
+                        showCard = false;
+                    }
+
+                    // Mostrar ou Ocultar o cartão
+                    card.style.display = showCard ? 'block' : 'none';
+                });
+            }
+
+            // Adicionar listener a todos os inputs de filtro
+            filterInputs.forEach(input => {
+                input.addEventListener('change', filterProducts);
+            });
+
+            // Adicionar listener ao botão de limpar
+            clearFiltersButton.addEventListener('click', () => {
+                filterInputs.forEach(input => {
+                    input.checked = false;
+                });
+                filterProducts(); // Re-aplicar filtros (que agora estão vazios)
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
